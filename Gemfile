@@ -7,7 +7,8 @@ gem "SystemTimer", :require => "system_timer", :platforms => :ruby_18
 gem "rack-timeout"
 
 
-gem 'jquery-rails'
+gem 'jquery-rails', "2.3.0"
+gem 'jquery-ui-rails'
 gem 'jquery_datepicker'
 
 group :assets do
