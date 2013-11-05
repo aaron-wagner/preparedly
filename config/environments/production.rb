@@ -59,7 +59,7 @@ Preparedly::Application.configure do
   config.i18n.fallbacks = true
 
   # Send deprecation notices to registered listeners
-  # config.active_support.deprecation = :notify
+  config.active_support.deprecation = :notify
 
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
@@ -69,7 +69,7 @@ Preparedly::Application.configure do
   config.action_mailer.default_url_options = { :host => ENV['DEVISE_HOST'] }
 end
 
-Preparedly::Application.config.middleware.use ExceptionNotifier,
-  :email_prefix => "[prepared.ly] ",
-  :sender_address => %{"notifier" <ENV['NOTIFIER_SENDER_EMAIL']>},
-  :exception_recipients => %w{ENV['NOTIFIER_RECIPIENT_EMAIL']}
+#Preparedly::Application.config.middleware.use ExceptionNotification,
+#  :email_prefix => "[prepared.ly] ",
+#  :sender_address => %{"notifier" <ENV['NOTIFIER_SENDER_EMAIL']>},
+#  :exception_recipients => %w{ENV['NOTIFIER_RECIPIENT_EMAIL']}
