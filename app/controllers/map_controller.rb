@@ -87,10 +87,10 @@ class MapController < ApplicationController
     @coordinates = [@geocode_response[0]['data']['geometry']['location']['lat'], @coordinates = @geocode_response[0]['data']['geometry']['location']['lng']]
     # get coordinates from yahoo geocoder response instead:
     # @coordinates = [@geocode_response[0]['data']['latitude'], @geocode_response[0]['data']['longitude']]
-
+    logger.debug "coordinates" + @coordinates
     if @coordinates
       @address = Address.find_or_create_by_address(:address => @address_str, 
-        :latlon => 'POINT(' + @coordinates[0].to_s + ' ' + @coordinates[1].to_s + ')')
+        :latlon => 'POINT(' + @coordinates[1].to_s + ' ' + @coordinates[0].to_s + ')')
       session[:last_address_id] = @address.id
 
       # Fire Station
