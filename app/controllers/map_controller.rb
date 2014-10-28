@@ -90,7 +90,7 @@ class MapController < ApplicationController
 
     if @coordinates
       @address = Address.find_or_create_by_address(:address => @address_str, 
-        :latlon => 'POINT(' + @coordinates[1].to_s + ' ' + @coordinates[0].to_s + ')')
+        :latlon => 'POINT(' + @coordinates[0].to_s + ' ' + @coordinates[1].to_s + ')')
       session[:last_address_id] = @address.id
 
       # Fire Station
