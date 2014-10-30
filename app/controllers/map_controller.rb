@@ -105,7 +105,7 @@ class MapController < ApplicationController
       # @distance = "%.02f" % (d_meters/1609.344)
       # Weather Conditions
       w_api = Wunderground.new(ENV['WUNDERGROUND_API_KEY'])
-      logger.info "w_api:" + w_api
+      logger.info "w_api:" + w_api.inspect
       w_response = w_api.get_conditions_for(@coordinates[1].to_s + "," + @coordinates[0].to_s)
       logger.info "w_response:" + w_response.inspect
       ###w_response = w_api.get_conditions_for(@address.latlon.y.to_s + "," + @address.latlon.x.to_s)
