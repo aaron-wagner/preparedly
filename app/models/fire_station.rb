@@ -13,6 +13,7 @@ class FireStation < ActiveRecord::Base
     #open('https://gist.githubusercontent.com/tinio/2504610/raw/76e47ca52136f2d6a88585cf8755e887795ee0ab/afd_stations.csv') do |f|
       csv_text = f.read()
     end
+    logger.info "csv_text:" + csv_text
     csv = CSV.parse(csv_text, :headers => true)
     csv.each do |row|
       fs = FireStation.create
