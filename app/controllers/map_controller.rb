@@ -92,6 +92,7 @@ class MapController < ApplicationController
       @address = Address.find_or_create_by_address(:address => @address_str, 
         :latlon => '(' + @coordinates[1].to_s + ',' + @coordinates[0].to_s + ')')
       session[:last_address_id] = @address.id
+      logger.info "address:" + @address.to_s
       #@address = Address.find_or_create_by_address(:address => @address_str, 
       #  :latlon => 'POINT(' + @coordinates[1].to_s + ',' + @coordinates[0].to_s + ')')
       #session[:last_address_id] = @address.id
