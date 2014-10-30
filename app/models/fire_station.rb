@@ -8,7 +8,9 @@ class FireStation < ActiveRecord::Base
 
   def self.populate
     csv_text = nil
-    open('https://raw.github.com/gist/2504610/76e47ca52136f2d6a88585cf8755e887795ee0ab/afd_stations.csv') do |f|
+    # on the CofA Github account under my login - Public GIST
+    open('https://gist.githubusercontent.com/aaron-wagner/60ba2b5e9eeab35828a5/raw/76e47ca52136f2d6a88585cf8755e887795ee0ab/afd_stations.csv') do |f|
+    #open('https://gist.githubusercontent.com/tinio/2504610/raw/76e47ca52136f2d6a88585cf8755e887795ee0ab/afd_stations.csv') do |f|
       csv_text = f.read()
     end
     csv = CSV.parse(csv_text, :headers => true)
