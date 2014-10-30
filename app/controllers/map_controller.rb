@@ -90,8 +90,11 @@ class MapController < ApplicationController
     logger.debug "coordinates:" + @coordinates[1].to_s + ' ' + @coordinates[0].to_s
     if @coordinates
       @address = Address.find_or_create_by_address(:address => @address_str, 
-        :latlon => 'POINT(' + @coordinates[1].to_s + ',' + @coordinates[0].to_s + ')')
+        :latlon => '(' + @coordinates[1].to_s + ',' + @coordinates[0].to_s + ')')
       session[:last_address_id] = @address.id
+      #@address = Address.find_or_create_by_address(:address => @address_str, 
+      #  :latlon => 'POINT(' + @coordinates[1].to_s + ',' + @coordinates[0].to_s + ')')
+      #session[:last_address_id] = @address.id
 
       # Fire Station
       @fs = FireStation.all() #order("ST_Distance(latlon, '" + @address.latlon.to_s + "') LIMIT 1")[0]
