@@ -92,7 +92,7 @@ class MapController < ApplicationController
       @address = Address.find_or_create_by_address(:address => @address_str, 
         :latlon => '(' + @coordinates[1].to_s + ',' + @coordinates[0].to_s + ')')
       session[:last_address_id] = @address.id
-      logger.info "-----ADDRESS:" + @address.latlon.inspect
+      logger.info "ADDRESS:" + @address.inspect
       #@address = Address.find_or_create_by_address(:address => @address_str, 
       #  :latlon => 'POINT(' + @coordinates[1].to_s + ',' + @coordinates[0].to_s + ')')
       #session[:last_address_id] = @address.id
@@ -104,7 +104,8 @@ class MapController < ApplicationController
       # @distance = "%.02f" % (d_meters/1609.344)
       # Weather Conditions
       w_api = Wunderground.new(ENV['WUNDERGROUND_API_KEY'])
-      w_response = w_api.get_conditions_for(@address.latlon.y.to_s + "," + @address.latlon.x.to_s)
+      w_response = w_api.get_conditions_for(@coordinates[1].to_s + "," + @coordinates[0].to_s)
+      ###w_response = w_api.get_conditions_for(@address.latlon.y.to_s + "," + @address.latlon.x.to_s)
       @wind_conditions = w_response['current_observation']['wind_string']
       @relative_humidity = w_response['current_observation']['relative_humidity']
 
