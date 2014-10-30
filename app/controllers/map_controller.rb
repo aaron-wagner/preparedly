@@ -18,6 +18,7 @@ class TFS
         :expiration => "1440"
       }
     )
+    logger.info 'response.inspect[get_token]: ' + response.inspect
 
     if response != nil    
       return response.body
@@ -47,6 +48,7 @@ class TFS
         :token => token
       }
     )
+    logger.info 'response.inspect[risk_assessment]: ' + response.inspect
 
     if response != nil
       json_response = JSON.parse(response.body)
