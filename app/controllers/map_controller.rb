@@ -82,6 +82,7 @@ class MapController < ApplicationController
 #    @address_components = @geocode_response[0]['data']['address_components']
 #    @county_item = @address_components.select { |e| e['types'][0] === "administrative_area_level_2" }
 #    @county = @county_item[0]["long_name"]
+    @county = 'Travis'
     # make sure you're getting back what you want from the geocoder. for example, the yahoo geocoder returns the county every time unlike above:
     # @county = @geocode_response[0]['data']['county'].gsub(' County', '').upcase
 #    @coordinates = [@geocode_response[0]['data']['geometry']['location']['lat'], @coordinates = @geocode_response[0]['data']['geometry']['location']['lng']]
@@ -111,6 +112,7 @@ class MapController < ApplicationController
       ###w_response = w_api.get_conditions_for(@address.latlon.y.to_s + "," + @address.latlon.x.to_s)
       @wind_conditions = w_response['current_observation']['wind_string']
       @relative_humidity = w_response['current_observation']['relative_humidity']
+      logger.info "wunderground:" + @wind_conditions + ' ' + @relative_humidity
 
       # Counties with a Burn Ban
       rss = Nokogiri::XML(open('http://tfsfrp.tamu.edu/wildfires/BurnBan.xml'))
@@ -118,6 +120,7 @@ class MapController < ApplicationController
       counties_text = rss.css('rss channel item description').text
       counties_array = counties_text.strip.split(', ')
       @counties_list = '\'' + counties_array.join("\', \'") + '\''
+      logger.info "BurnBan:" + @counties_list.inspect 
       #use single call to geocoder above and get county back instead of using CartoDB class and API call to get *nearest* county (which sometimes matched 'yes' for a non-TX county)
       if @county.nil?
         @inside_burnban = 'unavailable'
