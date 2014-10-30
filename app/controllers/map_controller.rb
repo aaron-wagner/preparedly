@@ -168,7 +168,8 @@ class MapController < ApplicationController
         risk_text_mapping[8] = "Very High"
         risk_text_mapping[9] = "Very High"
         @risk_text = risk_text_mapping[@risk_level]
-       end
+      end
+      logger.info "risk_level: " + @risk_text
     end
   end
 
