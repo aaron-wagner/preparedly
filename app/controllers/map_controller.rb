@@ -18,7 +18,6 @@ class TFS
         :expiration => "1440"
       }
     )
-    logger.info 'response.inspect[get_token]: ' + response.inspect
 
     if response != nil    
       return response.body
@@ -29,7 +28,9 @@ class TFS
 
   def self.risk_assessment(latlon)
 
+    logger.info 'response.inspect[get_token]: start..'
     token = self.get_token()
+    logger.info 'response.inspect[get_token]: ' + token.inspect
 
     response = get('/RiskAssessment/MapServer/identify',
       :headers => {
