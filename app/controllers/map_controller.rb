@@ -131,10 +131,12 @@ class MapController < ApplicationController
         @inside_burnban = 'no'
       end
       @burnban_updated = rss.css('rss channel item title').text.split('-')[1]
+      logger.info "burnbar y.n: " + @inside_burnban
 
       # Counties with a National Weather Service warning
       unless @county.nil?
         doc = Nokogiri::XML(open('http://alerts.weather.gov/cap/tx.php?x=0'))
+        logger.info "NWS warning: " + doc.inspect
         doc.remove_namespaces!
         @warnings = []
         @inside_nws = 'no'
@@ -146,6 +148,8 @@ class MapController < ApplicationController
           end
         end
       end
+      logger.info "NWS warnings: " + @inside_nws + ' | ' + @warnings.inspect
+
 
       # Risk Assessment Level
       if TFS.risk_assessment(@address.latlon) == nil
