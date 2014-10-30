@@ -97,8 +97,8 @@ class MapController < ApplicationController
       #session[:last_address_id] = @address.id
 
       # Fire Station
-      @fs = FireStation.all() #order("ST_Distance(latlon, '" + @address.latlon.to_s + "') LIMIT 1")[0]
-      logger.info "csv_text:" + @fs
+      #####@fs = FireStation.all() #order("ST_Distance(latlon, '" + @address.latlon.to_s + "') LIMIT 1")[0]
+      @fs = '';
       # d_meters = @address.latlon.distance(@cfs.latlon)
       # @distance = "%.02f" % (d_meters/1609.344)
       # Weather Conditions
