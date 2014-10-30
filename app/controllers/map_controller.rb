@@ -98,6 +98,7 @@ class MapController < ApplicationController
 
       # Fire Station
       @fs = FireStation.all() #order("ST_Distance(latlon, '" + @address.latlon.to_s + "') LIMIT 1")[0]
+      logger.info "csv_text:" + @fs
       # d_meters = @address.latlon.distance(@cfs.latlon)
       # @distance = "%.02f" % (d_meters/1609.344)
       # Weather Conditions
