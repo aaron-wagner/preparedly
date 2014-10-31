@@ -29,9 +29,9 @@ class TFS
 
   def self.risk_assessment(lat,lon)
 
-    logger.info 'response.inspect[get_token]: start..'
+    logger.info 'response.inspect.get_token: start..'
     token = self.get_token()
-    logger.info 'response.inspect[get_token]: ' + token.inspect
+    logger.info 'response.inspect.get_token: ' + token.inspect
 
     response = get('/RiskAssessment/MapServer/identify',
       :headers => {
@@ -51,7 +51,7 @@ class TFS
         :token => token
       }
     )
-    logger.info 'response.inspect[risk_assessment]: ' + response.inspect
+    logger.info 'response.inspect.risk_assessment: ' + response.inspect
 
     if response != nil
       json_response = JSON.parse(response.body)
