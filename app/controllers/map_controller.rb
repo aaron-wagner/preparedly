@@ -10,7 +10,7 @@ class TFS
 
 
   def self.get_token()
-    response = get('https://agstx.dtsagile.com/ArcGIS/Tokens',
+    response = get('http://vcloud.timmons.com/ArcGIS/Tokens',
       :query => {
         :request => "gettoken",
         :username => ENV['TXWRAP_USER'],
