@@ -98,6 +98,8 @@ class MapController < ApplicationController
       @address = Address.find_or_create_by_address(:address => @address_str, 
         :latlon => '(' + @coordinates[1].to_s + ',' + @coordinates[0].to_s + ')')
       session[:last_address_id] = @address.id
+      @address.latlon.y = @coordinates[1].to_s
+      @address.latlon.x = @coordinates[0].to_s
       logger.info "ADDRESS:" + @address.inspect
       #@address = Address.find_or_create_by_address(:address => @address_str, 
       #  :latlon => 'POINT(' + @coordinates[1].to_s + ',' + @coordinates[0].to_s + ')')
@@ -152,10 +154,9 @@ class MapController < ApplicationController
         end
       end
 
-      logger.info "TFS coords: " + @coordinates[1].to_s + "," + @coordinates[0].to_s
+      logger.info "TFS coords: " + @address.latlon.inspect
       # Risk Assessment Level
-#      if TFS.risk_assessment(@address.latlon) == nil
-      if TFS.risk_assessment(@coordinates[1].to_s + "," + @coordinates[0].to_s) == nil
+      if TFS.risk_assessment(@address.latlon) == nil
         @risk_text = "Not available at this time"
       else
         @risk_level = TFS.risk_assessment(@address.latlon)
