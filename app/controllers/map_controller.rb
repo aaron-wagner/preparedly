@@ -156,7 +156,8 @@ class MapController < ApplicationController
 
 
       # Risk Assessment Level
-      if TFS.risk_assessment(@address.latlon) == nil
+#      if TFS.risk_assessment(@address.latlon) == nil
+      if TFS.risk_assessment(@coordinates[1].to_s + "," + @coordinates[0].to_s) == nil
         @risk_text = "Not available at this time"
       else
         @risk_level = TFS.risk_assessment(@address.latlon)
