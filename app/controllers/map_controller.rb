@@ -27,7 +27,7 @@ class TFS
     end
   end
 
-  def self.risk_assessment(latlon)
+  def self.risk_assessment(lat,lon)
 
     logger.info 'response.inspect[get_token]: start..'
     token = self.get_token()
@@ -39,7 +39,8 @@ class TFS
         },
       :query => {
         :geometryType => "esriGeometryPoint",
-        :geometry => "{x: " + latlon.x.to_s + ", y: " + latlon.y.to_s + "}",
+#        :geometry => "{x: " + latlon.x.to_s + ", y: " + latlon.y.to_s + "}",
+        :geometry => "{x: " + lat.to_s + ", y: " + lon.to_s + "}",
         :sr => 4326,
         :layers => 'all',
         :tolerance => 3,
@@ -156,10 +157,12 @@ class MapController < ApplicationController
 
       logger.info "TFS coords: " + @address.latlon.inspect
       # Risk Assessment Level
-      if TFS.risk_assessment(@address.latlon) == nil
+#      if TFS.risk_assessment(@address.latlon) == nil
+      if TFS.risk_assessment(@coordinates[1].to_s, @coordinates[0].to_s) == nil
         @risk_text = "Not available at this time"
       else
-        @risk_level = TFS.risk_assessment(@address.latlon)
+#        @risk_level = TFS.risk_assessment(@address.latlon)
+        @risk_level = TFS.risk_assessment(@coordinates[1].to_s, @coordinates[0].to_s)
         risk_text_mapping = Hash.new {0}
         risk_text_mapping[0] = "Very Low"
         risk_text_mapping[1] = "Very Low"
