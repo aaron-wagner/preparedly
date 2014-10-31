@@ -29,9 +29,9 @@ class TFS
 
   def self.risk_assessment(lat,lon)
 
-    logger.info 'response.inspect.get_token: start..'
+    logger.info "response.inspect.get_token: start.."
     token = self.get_token()
-    logger.info 'response.inspect.get_token: ' + token.inspect
+    logger.info "response.inspect.get_token: " + token.inspect
 
     response = get('/RiskAssessment/MapServer/identify',
       :headers => {
@@ -51,7 +51,7 @@ class TFS
         :token => token
       }
     )
-    logger.info 'response.inspect.risk_assessment: ' + response.inspect
+    logger.info "response.inspect.risk_assessment: " + response.inspect
 
     if response != nil
       json_response = JSON.parse(response.body)
@@ -113,13 +113,11 @@ class MapController < ApplicationController
       # @distance = "%.02f" % (d_meters/1609.344)
       # Weather Conditions
       w_api = Wunderground.new(ENV['WUNDERGROUND_API_KEY'])
-      logger.info "w_api:" + w_api.inspect
       w_response = w_api.get_conditions_for(@coordinates[1].to_s + "," + @coordinates[0].to_s)
-      logger.info "w_response:" + w_response.inspect
       ###w_response = w_api.get_conditions_for(@address.latlon.y.to_s + "," + @address.latlon.x.to_s)
       @wind_conditions = w_response['current_observation']['wind_string']
       @relative_humidity = w_response['current_observation']['relative_humidity']
-      logger.info "wunderground:" + @wind_conditions + ' ' + @relative_humidity
+      logger.info "wunderground:" + @wind_conditions + ' | ' + @relative_humidity
 
       # Counties with a Burn Ban
       rss = Nokogiri::XML(open('http://tfsfrp.tamu.edu/wildfires/BurnBan.xml'))
