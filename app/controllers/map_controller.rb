@@ -5,7 +5,8 @@ require 'wunderground'
 class TFS
   include HTTParty
 
-  base_uri 'http://ags1.dtsgis.com/ArcGIS/rest/services/v3scfa'
+  #base_uri 'http://ags1.dtsgis.com/ArcGIS/rest/services/v3scfa'
+  base_uri 'http://vcloud.timmons.com/ArcGIS/rest/services'
 
 
   def self.get_token()
