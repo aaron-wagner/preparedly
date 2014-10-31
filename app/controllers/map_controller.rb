@@ -51,7 +51,7 @@ class TFS
     )
 
     if response != nil
-      logger.info response.body
+      logger.info("response.body.inspect: " + response.body.inspect)
       json_response = JSON.parse(response.body)
       if json_response['results'].length > 0
         return json_response['results'][0]['attributes']['Pixel Value'].to_i
