@@ -49,7 +49,6 @@ class TFS
         :token => token
       }
     )
-    logger.info "response.inspect.risk_assessment: " + response.inspect
 
     if response != nil
       json_response = JSON.parse(response.body)
