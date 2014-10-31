@@ -140,7 +140,6 @@ class MapController < ApplicationController
       # Counties with a National Weather Service warning
       unless @county.nil?
         doc = Nokogiri::XML(open('http://alerts.weather.gov/cap/tx.php?x=0'))
-        logger.info "NWS warning: " + doc.inspect
         doc.remove_namespaces!
         @warnings = []
         @inside_nws = 'no'
@@ -152,9 +151,8 @@ class MapController < ApplicationController
           end
         end
       end
-      logger.info "NWS warnings: " + @inside_nws + ' | ' + @warnings.inspect
 
-
+      logger.info "TFS coords: " + @coordinates[1].to_s + "," + @coordinates[0].to_s
       # Risk Assessment Level
 #      if TFS.risk_assessment(@address.latlon) == nil
       if TFS.risk_assessment(@coordinates[1].to_s + "," + @coordinates[0].to_s) == nil
