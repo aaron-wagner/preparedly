@@ -151,7 +151,7 @@ class MapController < ApplicationController
         end
       end
 
-      logger.info "TFS coords: " + @coordinates
+      logger.info "TFS coords: " + @coordinates.inspect
       # Risk Assessment Level
 #      if TFS.risk_assessment(@address.latlon) == nil
       if TFS.risk_assessment(@coordinates) == nil
