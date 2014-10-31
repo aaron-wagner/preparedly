@@ -4,6 +4,7 @@ require 'wunderground'
 
 class TFS
   include HTTParty
+  require 'logger'
 
   #base_uri 'http://ags1.dtsgis.com/ArcGIS/rest/services/v3scfa'
   base_uri 'http://vcloud.timmons.com/ArcGIS/rest/services'
