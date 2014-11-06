@@ -95,12 +95,11 @@ function setupMap() {
         attrib = 'Map tiles by Stamen',
         baseLayer = new L.TileLayer(baseUrl, {attribution: attrib, maxZoom:18});
     map.addLayer(baseLayer);
-    console.log("map1: " . map);
+    console.log(map);
 
     // as of July 14, this server was returning nothing, the requests were failing from http://radar.srh.noaa.gov/fire/ too
     var fireUrl = 'http://radarcache.srh.noaa.gov/tilecache/tilecache.py/1.0.0/fwx/{z}/{x}/{y}.png?type=google&LAYERS=fwx', attrib = 'Red flag fire warning from NWS', fireLayer = new L.TileLayer(fireUrl, {attribution: attrib, maxZoom:18}); 
-    map.addLayer(fireLayer);
-    console.log("map1: " . map);
+//    map.addLayer(fireLayer);
 
     var bbox = '{  "xmin":-98.997803,  "ymin":29.430029,  "xmax":-96.778564,  "ymax":30.779598,  "spatialReference":{"wkid":4326} }';
     //var bbox = '{  "xmin":-124.123535,  "ymin":42.212245,  "xmax":-116.51001,  "ymax":45.9053,  "spatialReference":{"wkid":4326} }';
@@ -140,7 +139,7 @@ function setupMap() {
     s.src = 'http://rmgsc.cr.usgs.gov/ArcGIS/rest/services/nhss_weat/MapServer/0/query?f=json&returnGeometry=true&spatialRel=esriSpatialRelIntersects&maxAllowableOffset=4891&geometry=' + bbox + '&geometryType=esriGeometryEnvelope&inSR=4326&outFields=*&outSR=4326&callback=verifyRedFlag';
     s.type = "text/javascript";
     document.body.appendChild(s);
-    console.log("s.src: " . s.src);
+    console.log("s.src: " + s.src);
 
     var tx_burn_ban_counties = new L.CartoDBLayer({
     show_cartodb_logo: false,
