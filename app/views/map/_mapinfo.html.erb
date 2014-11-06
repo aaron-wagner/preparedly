@@ -74,6 +74,7 @@
 <script>
 var fire_stations = <%=raw @fs.to_json %>;
 var address_location = {lat: <%=@coordinates[0].to_s %>, lon: <%=@coordinates[1].to_s %>};
+console.log('{lat: ' + <%=@coordinates[0].to_s %> + ', lon: ' + <%=@coordinates[1].to_s %>});
 //@coordinates[1].to_s + ',' + @coordinates[0].to_s
 var county_list = "<%= @counties_list %>";
 
@@ -91,12 +92,11 @@ function setupMap() {
     var mapCenter = new L.LatLng(address_location.lat, address_location.lon);
     var mapZoom = 12;
     //var baseUrl = 'http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.jpg',
-    //var baseUrl = 'http://{s}.tile.stamen.com/terrain/#{z}/{x}/{y}',
-    var baseUrl = 'http://{s}.tile.stamen.com/terrain/#{z}/' + address_location.lon + '/' + address_location.lat,
+    var baseUrl = 'http://{s}.tile.stamen.com/terrain/#{z}/{x}/{y}',
+    //var baseUrl = 'http://{s}.tile.stamen.com/terrain/#{z}/' + address_location.lon + '/' + address_location.lat,
         attrib = 'Map tiles by Stamen',
         baseLayer = new L.TileLayer(baseUrl, {attribution: attrib, maxZoom:18});
     map.addLayer(baseLayer);
-    console.log(map);
 
     // as of July 14, this server was returning nothing, the requests were failing from http://radar.srh.noaa.gov/fire/ too
 //    var fireUrl = 'http://radarcache.srh.noaa.gov/tilecache/tilecache.py/1.0.0/fwx/{z}/{x}/{y}.png?type=google&LAYERS=fwx', attrib = 'Red flag fire warning from NWS', fireLayer = new L.TileLayer(fireUrl, {attribution: attrib, maxZoom:18}); 
