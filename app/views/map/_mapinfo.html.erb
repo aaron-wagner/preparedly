@@ -95,6 +95,7 @@ function setupMap() {
         attrib = 'Map tiles by Stamen',
         baseLayer = new L.TileLayer(baseUrl, {attribution: attrib, maxZoom:18});
     map.addLayer(baseLayer);
+    console.log(baseUrl);
 
     // as of July 14, this server was returning nothing, the requests were failing from http://radar.srh.noaa.gov/fire/ too
     var fireUrl = 'http://radarcache.srh.noaa.gov/tilecache/tilecache.py/1.0.0/fwx/{z}/{x}/{y}.png?type=google&LAYERS=fwx', attrib = 'Red flag fire warning from NWS', fireLayer = new L.TileLayer(fireUrl, {attribution: attrib, maxZoom:18}); 
