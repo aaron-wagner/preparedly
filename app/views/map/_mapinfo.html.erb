@@ -89,6 +89,7 @@ function setupMap() {
 
     // make a map, using normal leaflet and stamen toner tiles
     map = new L.Map('map', {maxZoom: 18});
+    //Syntax --> L.latLng( <Number> latitude, <Number> longitude, <Number> altitude? ) 
     var mapCenter = new L.LatLng(address_location.lat, address_location.lon);
     var mapZoom = 12;
     //var baseUrl = 'http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.jpg',
@@ -138,7 +139,7 @@ function setupMap() {
     };
     var s = document.createElement("script");
     //s.src = 'http://rmgsc.cr.usgs.gov/ArcGIS/rest/services/nhss_weat/MapServer/0/query?f=json&returnGeometry=true&spatialRel=esriSpatialRelIntersects&maxAllowableOffset=4891&geometry=' + bbox + '&geometryType=esriGeometryEnvelope&inSR=4326&outFields=*&outSR=4326&callback=verifyRedFlag';
-    //s.src = 'http://gis.srh.noaa.gov/arcgis/rest/services/watchwarn/MapServer/0/query?where=&text=&objectIds=&time=&geometry=-104,35.6,-94.32,41&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=*&returnGeometry=true&maxAllowableOffset=4891&geometryPrecision=&outSR=4326&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&f=pjson';
+    s.src = 'http://gis.srh.noaa.gov/arcgis/rest/services/watchwarn/MapServer/0/query?where=&text=&objectIds=&time=&geometry=-104,35.6,-94.32,41&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=*&returnGeometry=true&maxAllowableOffset=4891&geometryPrecision=&outSR=4326&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&f=pjson';
     s.type = "text/javascript";
     document.body.appendChild(s);
     console.log("s.src: " + s.src);
@@ -155,8 +156,8 @@ function setupMap() {
     });
 */
     homeMarker = new L.Marker(new L.LatLng(address_location.lat, address_location.lon));
-//    map.addLayer(homeMarker);
-//    map.setView(mapCenter, mapZoom);
+    map.addLayer(homeMarker);
+    map.setView(mapCenter, mapZoom);
 
 
     var MyIcon = L.Icon.extend({
