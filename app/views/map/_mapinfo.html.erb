@@ -73,7 +73,9 @@
 
 <script>
 var fire_stations = <%=raw @fs.to_json %>;
-var address_location = {lat: <%=@address.latlon.y %>, lon: <%=@address.latlon.x %>};
+//var address_location = {lat: <%=@address.latlon.y %>, lon: <%=@address.latlon.x %>};
+var address_location = {lat: <%=@coordinates[1].to_s %>, lon: <%=@coordinates[0].to_s %>};
+//@coordinates[1].to_s + ',' + @coordinates[0].to_s
 var county_list = "<%= @counties_list %>";
 
 var map;
@@ -89,7 +91,8 @@ function setupMap() {
     map = new L.Map('map', {maxZoom: 18});
     var mapCenter = new L.LatLng(address_location.lat, address_location.lon);
     var mapZoom = 12;
-    var baseUrl = 'http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.jpg',
+    //var baseUrl = 'http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.jpg',
+    var baseUrl = 'http://{s}.tile.stamen.com/terrain/#{z}/{x}/{y}',
         attrib = 'Map tiles by Stamen',
         baseLayer = new L.TileLayer(baseUrl, {attribution: attrib, maxZoom:18});
     map.addLayer(baseLayer);
