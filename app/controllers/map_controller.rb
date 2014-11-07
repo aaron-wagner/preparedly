@@ -89,17 +89,14 @@ class MapController < ApplicationController
     # make sure you're getting back what you want from the geocoder. for example, the yahoo geocoder returns the county every time unlike above:
     # @county = @geocode_response[0]['data']['county'].gsub(' County', '').upcase
 #    @coordinates = [@geocode_response[0]['data']['geometry']['location']['lat'], @coordinates = @geocode_response[0]['data']['geometry']['location']['lng']]
-    #@coordinates = ['-97.77818049999999', '30.2303058']
-    @coordinates = ['-97.7781', '30.2303']
+    @coordinates = ['-97.77818049999999', '30.2303058']
     # get coordinates from yahoo geocoder response instead:
     # @coordinates = [@geocode_response[0]['data']['latitude'], @geocode_response[0]['data']['longitude']]
     logger.info "coordinates:" + @coordinates[1].to_s + ' ' + @coordinates[0].to_s
     if @coordinates
       @address = Address.find_or_create_by_address(:address => @address_str, 
-        :latlon => '(' + @coordinates[1].to_s + ',' + @coordinates[0].to_s + ')')
+        :latlon => 'POINT(' + @coordinates[1].to_s + ',' + @coordinates[0].to_s + ')')
       session[:last_address_id] = @address.id
-#      @address.latlon.y => @coordinates[1].to_s
-#      @address.latlon.x => @coordinates[0].to_s
       logger.info "ADDRESS:" + @address.inspect
       #@address = Address.find_or_create_by_address(:address => @address_str, 
       #  :latlon => 'POINT(' + @coordinates[1].to_s + ',' + @coordinates[0].to_s + ')')
@@ -160,6 +157,7 @@ class MapController < ApplicationController
       else
 #        @risk_level = TFS.risk_assessment(@address.latlon)
         @risk_level = TFS.risk_assessment(@coordinates)
+        logger.info "risk_level_num: " + @risk_level
         risk_text_mapping = Hash.new {0}
         risk_text_mapping[0] = "Very Low"
         risk_text_mapping[1] = "Very Low"
