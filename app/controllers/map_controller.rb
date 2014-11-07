@@ -95,7 +95,7 @@ class MapController < ApplicationController
     logger.info "coordinates:" + @coordinates[1].to_s + ' ' + @coordinates[0].to_s
     if @coordinates
       @address = Address.find_or_create_by_address(:address => @address_str, 
-        :latlon => '(' + @coordinates[1].to_s + ' ' + @coordinates[0].to_s + ')')
+        :latlon => '(' + @coordinates[1].to_s + ',' + @coordinates[0].to_s + ')')
       session[:last_address_id] = @address.id
       logger.info "ADDRESS:" + @address.inspect
       #@address = Address.find_or_create_by_address(:address => @address_str, 
@@ -132,7 +132,7 @@ class MapController < ApplicationController
         @inside_burnban = 'no'
       end
       @burnban_updated = rss.css('rss channel item title').text.split('-')[1]
-      logger.info "burnbar y.n: " + @inside_burnban
+      logger.info "burnban y.n: " + @inside_burnban
 
       # Counties with a National Weather Service warning
       unless @county.nil?
