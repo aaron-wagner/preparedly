@@ -143,17 +143,17 @@ console.log("data: ");console.log(data);
     document.body.appendChild(s);
     console.log("s.src: " + s.src);
 
-/*  var tx_burn_ban_counties = new L.CartoDBLayer({
+  var tx_burn_ban_counties = new L.CartoDBLayer({
     show_cartodb_logo: false,
     map_canvas: 'map',
     map: map,
-    user_name:'tinio',
-    table_name: 'cntys04',
+    user_name:'aaronwa',
+    table_name: 'countyp010_1',
     query: "SELECT cartodb_id, the_geom_webmercator FROM {{table_name}} WHERE name in ("+county_list+")",
-    infowindow: "SELECT cartodb_id, name_locas FROM {{table_name}} WHERE cartodb_id={{feature}}",
+    infowindow: "SELECT cartodb_id, name FROM {{table_name}} WHERE cartodb_id={{feature}}",
     auto_bound: false 
     });
-*/
+
     homeMarker = new L.Marker(new L.LatLng(address_location.lat, address_location.lon));
     map.addLayer(homeMarker);
     map.setView(mapCenter, mapZoom);
