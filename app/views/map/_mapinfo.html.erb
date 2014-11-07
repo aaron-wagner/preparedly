@@ -92,9 +92,9 @@ function setupMap() {
     //Syntax --> L.latLng( <Number> latitude, <Number> longitude, <Number> altitude? ) 
     var mapCenter = new L.LatLng(address_location.lat, address_location.lon);
     var mapZoom = 12;
-    //var baseUrl = 'http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.jpg',
+    var baseUrl = 'http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.jpg',
     //var baseUrl = 'http://{s}.tile.stamen.com/terrain/#{z}/{x}/{y}',
-    var baseUrl = 'http://{s}.tile.stamen.com/terrain/#{z}/' + address_location.lat + '/' + address_location.lon,
+    //var baseUrl = 'http://{s}.tile.stamen.com/terrain/#{z}/' + address_location.lat + '/' + address_location.lon,
         attrib = 'Map tiles by Stamen',
         baseLayer = new L.TileLayer(baseUrl, {attribution: attrib, maxZoom:18});
     map.addLayer(baseLayer);
