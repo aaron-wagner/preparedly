@@ -89,7 +89,8 @@ class MapController < ApplicationController
     # make sure you're getting back what you want from the geocoder. for example, the yahoo geocoder returns the county every time unlike above:
     # @county = @geocode_response[0]['data']['county'].gsub(' County', '').upcase
 #    @coordinates = [@geocode_response[0]['data']['geometry']['location']['lat'], @coordinates = @geocode_response[0]['data']['geometry']['location']['lng']]
-    @coordinates = ['-97.77818049999999', '30.2303058']
+    #@coordinates = ['-97.77818049999999', '30.2303058']
+    @coordinates = ['-97.7781', '30.2303']
     # get coordinates from yahoo geocoder response instead:
     # @coordinates = [@geocode_response[0]['data']['latitude'], @geocode_response[0]['data']['longitude']]
     logger.info "coordinates:" + @coordinates[1].to_s + ' ' + @coordinates[0].to_s
