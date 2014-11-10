@@ -76,7 +76,6 @@ var fire_stations = <%=raw @fs.to_json %>;
 var address_location = {lat: <%=@coordinates[1].to_s %>, lon: <%=@coordinates[0].to_s %>};
 console.log(address_location);
 //@coordinates[1].to_s + ',' + @coordinates[0].to_s
-console.log(<%= @counties_list %>);
 var county_list = "<%= @counties_list %>";
 var map;
 var homeMarker;
