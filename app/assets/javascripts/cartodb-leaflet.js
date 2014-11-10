@@ -321,7 +321,7 @@ L.CartoDBInfowindow = L.Class.extend({
     minWidth: 50,
     maxWidth: 300,
     autoPan: true,
-    closeButton: true,
+    closeButton: false,
     offset: new L.Point(58, 2),
     autoPanPadding: new L.Point(5, 5)
   },
