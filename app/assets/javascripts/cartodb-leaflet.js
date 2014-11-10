@@ -464,7 +464,7 @@ L.CartoDBInfowindow = L.Class.extend({
     this._contentNode.innerHTML = content;
     
     // Show cartodb-id
-    this._tipContainer.innerHTML = '<label>id: <strong>'+this._feature+'</strong></label>';
+    //this._tipContainer.innerHTML = '<label>id: <strong>'+this._feature+'</strong></label>';
   },
 
   _updateLayout: function() {
