@@ -119,6 +119,7 @@ class MapController < ApplicationController
       rss = Nokogiri::XML(open('http://tfsfrp.tamu.edu/wildfires/BurnBan.xml'))
       rss.encoding = 'utf-8'
       counties_text = rss.css('rss channel item description').text
+      counties_text = counties_text.downcase
       counties_array = counties_text.strip.split(', ')
       @counties_list = '\'' + counties_array.join("\', \'") + '\''
       logger.info "BurnBan:" + @counties_list.inspect 
@@ -157,7 +158,7 @@ class MapController < ApplicationController
       else
 #        @risk_level = TFS.risk_assessment(@address.latlon)
         @risk_level = TFS.risk_assessment(@coordinates)
-        logger.info "risk_level_num: " + @risk_level.to_s
+        logger.info "risk_level_num: " + @risk_level.to_
         risk_text_mapping = Hash.new {0}
         risk_text_mapping[0] = "Very Low"
         risk_text_mapping[1] = "Very Low"
