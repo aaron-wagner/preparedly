@@ -77,8 +77,8 @@ var address_location = {lat: <%=@coordinates[1].to_s %>, lon: <%=@coordinates[0]
 console.log(address_location);
 //@coordinates[1].to_s + ',' + @coordinates[0].to_s
 var county_list = "<%= @counties_list %>";
-county_list = decodeURI(county_list);
-console.log(county_list);
+county_list = county_list.replace("&#x27;", "'");
+console.log(county_list.);
 var map;
 var homeMarker;
 var verifyRedFlag;
