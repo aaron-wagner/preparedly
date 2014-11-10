@@ -158,7 +158,7 @@ class MapController < ApplicationController
       else
 #        @risk_level = TFS.risk_assessment(@address.latlon)
         @risk_level = TFS.risk_assessment(@coordinates)
-        logger.info "risk_level_num: " + @risk_level.to_
+        logger.info "risk_level_num: " + @risk_level.to_s
         risk_text_mapping = Hash.new {0}
         risk_text_mapping[0] = "Very Low"
         risk_text_mapping[1] = "Very Low"
