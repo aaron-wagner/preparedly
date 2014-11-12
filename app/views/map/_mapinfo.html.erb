@@ -175,7 +175,7 @@ function setupMap() {
       var items = [];
     console.log(data.toSource());
       $.each( data, function( key, val ) {
-        console.log ( key + " | " + val.location_1.human_address.zip );
+        console.log ( key + " | " + val.location_1.human_address );
       });
     });
     var stations = new L.LayerGroup();
