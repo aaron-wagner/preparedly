@@ -72,15 +72,7 @@
 </div>
 
 <script>
-var fire_stations = <%=raw @fs.to_json %>;
-$.getJSON( "http://data.austintexas.gov/resource/64cq-wf5u.json", function( data ) {
-  var items = [];
-console.log(data.toSource());
-  $.each( data, function( key, val ) {
-    console.log ( key + " | " + val.name );
-  });
-});
-
+//var fire_stations = <%=raw @fs.to_json %>;
 var address_location = {lat: <%=@coordinates[1].to_s %>, lon: <%=@coordinates[0].to_s %>};
 //@coordinates[1].to_s + ',' + @coordinates[0].to_s
 var county_list = "<%= @counties_list %>";
@@ -178,6 +170,14 @@ function setupMap() {
 
     var icon = new MyIcon();
 
+    var fire_stations = <%=raw @fs.to_json %>;
+    $.getJSON( "http://data.austintexas.gov/resource/64cq-wf5u.json", function( data ) {
+      var items = [];
+    console.log(data.toSource());
+      $.each( data, function( key, val ) {
+        console.log ( key + " | " + val.location_1.human_address.zip );
+      });
+    });
     var stations = new L.LayerGroup();
     for(f in fire_stations){
         station = fire_stations[f];
