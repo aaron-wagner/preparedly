@@ -77,7 +77,7 @@ $.getJSON( "http://data.austintexas.gov/resource/64cq-wf5u.json", function( data
   var items = [];
 console.log(data.toSource());
   $.each( data, function( key, val ) {
-    console.log ( key + " | " + val );
+    console.log ( key + " | " + val.name );
   });
 });
 
