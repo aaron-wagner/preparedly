@@ -170,18 +170,24 @@ function setupMap() {
 
     var icon = new MyIcon();
 
-    //var fire_stations = <%=raw @fs.to_json %>;
+    var stations = new L.LayerGroup();
+
     $.getJSON( "http://data.austintexas.gov/resource/64cq-wf5u.json", function( data ) {
     console.log(data.toSource());
       $.each( data, function( key, val ) {
         var rr = JSON.parse(val.location_1.human_address);
         console.log ( rr.zip );
         console.log ( rr.address );
-        console.log ( val.y );
+        console.log ( val.y ); 
         console.log ( val.x );
+        var m = new L.Marker(new L.LatLng(val.y, val.x), {icon:icon});
+        stations.addLayer(m);
+        m.bindPopup(rr.address + "<br />Austin, TX " + rr.zip).openPopup();
       });
     });
-    var stations = new L.LayerGroup();
+    map.addLayer(stations);
+
+/*    var stations = new L.LayerGroup();
     for(f in fire_stations){
         station = fire_stations[f];
         
@@ -189,13 +195,13 @@ function setupMap() {
         stations.addLayer(m);
         m.bindPopup(station.address + "<br />Austin, TX " + station.zip).openPopup();
     }
-//    map.addLayer(stations);
-
+    map.addLayer(stations);
+*/
     $('#firestations').click(function(){
         if($(this).is(":checked")){
-//             map.addLayer(stations);
+          map.addLayer(stations);
         }else{
-//            map.removeLayer(stations);
+          map.removeLayer(stations);
         }
     })
 }
