@@ -170,12 +170,15 @@ function setupMap() {
 
     var icon = new MyIcon();
 
-    var fire_stations = <%=raw @fs.to_json %>;
+    //var fire_stations = <%=raw @fs.to_json %>;
     $.getJSON( "http://data.austintexas.gov/resource/64cq-wf5u.json", function( data ) {
-      var items = [];
     console.log(data.toSource());
       $.each( data, function( key, val ) {
-        console.log ( key + " | " + val.location_1.human_address );
+        var rr = JSON.parse(val.location_1.human_address);
+        console.log ( rr.zip );
+        console.log ( rr.address );
+        console.log ( val.y );
+        console.log ( val.x );
       });
     });
     var stations = new L.LayerGroup();
