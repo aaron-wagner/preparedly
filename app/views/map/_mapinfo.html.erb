@@ -75,6 +75,7 @@
 var fire_stations = <%=raw @fs.to_json %>;
 $.getJSON( "http://data.austintexas.gov/resource/64cq-wf5u.json", function( data ) {
   var items = [];
+console.log(data.toSource());
   $.each( data, function( key, val ) {
     console.log ( key + " | " + val );
   });
