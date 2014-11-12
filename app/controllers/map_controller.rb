@@ -103,8 +103,8 @@ class MapController < ApplicationController
       #session[:last_address_id] = @address.id
 
       # Fire Station
-      #####@fs = FireStation.all() #order("ST_Distance(latlon, '" + @address.latlon.to_s + "') LIMIT 1")[0]
-      @fs = '';
+      #@fs = FireStation.all() #order("ST_Distance(latlon, '" + @address.latlon.to_s + "') LIMIT 1")[0]
+      #@fs = '';
       # d_meters = @address.latlon.distance(@cfs.latlon)
       # @distance = "%.02f" % (d_meters/1609.344)
       # Weather Conditions
@@ -113,7 +113,6 @@ class MapController < ApplicationController
       ###w_response = w_api.get_conditions_for(@address.latlon.y.to_s + "," + @address.latlon.x.to_s)
       @wind_conditions = w_response['current_observation']['wind_string']
       @relative_humidity = w_response['current_observation']['relative_humidity']
-      logger.info "wunderground:" + @wind_conditions + ' | ' + @relative_humidity
 
       # Counties with a Burn Ban
       rss = Nokogiri::XML(open('http://tfsfrp.tamu.edu/wildfires/BurnBan.xml'))
@@ -122,7 +121,6 @@ class MapController < ApplicationController
       counties_text = counties_text.downcase
       counties_array = counties_text.strip.split(', ')
       @counties_list = '\'' + counties_array.join("\', \'") + '\''
-      logger.info "BurnBan:" + @counties_list.inspect 
       #use single call to geocoder above and get county back instead of using CartoDB class and API call to get *nearest* county (which sometimes matched 'yes' for a non-TX county)
       if @county.nil?
         @inside_burnban = 'unavailable'
@@ -133,7 +131,6 @@ class MapController < ApplicationController
         @inside_burnban = 'no'
       end
       @burnban_updated = rss.css('rss channel item title').text.split('-')[1]
-      logger.info "burnban y.n: " + @inside_burnban
 
       # Counties with a National Weather Service warning
       unless @county.nil?

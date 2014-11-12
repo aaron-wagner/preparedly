@@ -73,12 +73,17 @@
 
 <script>
 var fire_stations = <%=raw @fs.to_json %>;
+$.getJSON( "http://data.austintexas.gov/resource/64cq-wf5u.json", function( data ) {
+  var items = [];
+  $.each( data, function( key, val ) {
+    console.log ( key + " | " + val );
+  });
+});
+
 var address_location = {lat: <%=@coordinates[1].to_s %>, lon: <%=@coordinates[0].to_s %>};
-console.log(address_location);
 //@coordinates[1].to_s + ',' + @coordinates[0].to_s
 var county_list = "<%= @counties_list %>";
 county_list = county_list.replace(/&#x27;/g, "'");
-console.log(county_list);
 var map;
 var homeMarker;
 var verifyRedFlag;
@@ -106,7 +111,6 @@ function setupMap() {
     //var bbox = '{  "xmin":-124.123535,  "ymin":42.212245,  "xmax":-116.51001,  "ymax":45.9053,  "spatialReference":{"wkid":4326} }';
 
     verifyRedFlag = function(data){
-console.log("data: ");console.log(data);
         if(data.features.length == 0){
             // no warnings
             //console.log("no warnings");
@@ -139,10 +143,11 @@ console.log("data: ");console.log(data);
     };
     var s = document.createElement("script");
     //s.src = 'http://rmgsc.cr.usgs.gov/ArcGIS/rest/services/nhss_weat/MapServer/0/query?f=json&returnGeometry=true&spatialRel=esriSpatialRelIntersects&maxAllowableOffset=4891&geometry=' + bbox + '&geometryType=esriGeometryEnvelope&inSR=4326&outFields=*&outSR=4326&callback=verifyRedFlag';
+    // replaced above url/service with below 11.07.14, it does take a bit of time to get the data back from noaa
+    // it will update the page when the data returns -aw
     s.src = 'http://gis.srh.noaa.gov/arcgis/rest/services/watchwarn/MapServer/0/query?where=&text=&objectIds=&time=&geometry=-98.99,29.43,-96.77,30.77&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=*&returnGeometry=true&maxAllowableOffset=4891&geometryPrecision=&outSR=4326&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&f=pjson&callback=verifyRedFlag';
     s.type = "text/javascript";
     document.body.appendChild(s);
-    console.log("s.src: " + s.src);
 
   var tx_burn_ban_counties = new L.CartoDBLayer({
     show_cartodb_logo: false,

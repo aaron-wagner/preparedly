@@ -10,19 +10,22 @@ class FireStation < ActiveRecord::Base
   def self.populate
     csv_text = nil
     # on the CofA Github account under my login - Public GIST
-    open('https://gist.githubusercontent.com/aaron-wagner/60ba2b5e9eeab35828a5/raw/76e47ca52136f2d6a88585cf8755e887795ee0ab/afd_stations.csv') do |f|
+    #open('https://gist.githubusercontent.com/aaron-wagner/60ba2b5e9eeab35828a5/raw/76e47ca52136f2d6a88585cf8755e887795ee0ab/afd_stations.csv') do |f|
     #-- firestation coords on CofA dataportal --#
-    #open('https://data.austintexas.gov/api/views/64cq-wf5u/rows.csv') do |f|
+    open('https://data.austintexas.gov/api/views/64cq-wf5u/rows.csv') do |f|
     #open('https://gist.githubusercontent.com/tinio/2504610/raw/76e47ca52136f2d6a88585cf8755e887795ee0ab/afd_stations.csv') do |f|
       csv_text = f.read()
     end
     logger.info "csv_text:" + csv_text
     csv = CSV.parse(csv_text, :headers => true)
     csv.each do |row|
+      ## cols start on 0 ##
       fs = FireStation.create
       fs.address = row[2]
       fs.zip = row[5].to_i
-      fs.latlon = "POINT(" + row[7] + " " + row[6] +")"
+      fs.lat = row[7]
+      fs.lon = row[7]
+      #fs.latlon = "POINT(" + row[7] + " " + row[6] +")"
       puts fs.address, fs.zip, fs.latlon
       fs.save!
     end
