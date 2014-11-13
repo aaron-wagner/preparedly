@@ -97,8 +97,8 @@ function setupMap() {
     map.addLayer(baseLayer);
 
     // as of July 14, this server was returning nothing, the requests were failing from http://radar.srh.noaa.gov/fire/ too
-//    var fireUrl = 'http://radarcache.srh.noaa.gov/tilecache/tilecache.py/1.0.0/fwx/{z}/{x}/{y}.png?type=google&LAYERS=fwx', attrib = 'Red flag fire warning from NWS', fireLayer = new L.TileLayer(fireUrl, {attribution: attrib, maxZoom:18}); 
-//    map.addLayer(fireLayer);
+    //    var fireUrl = 'http://radarcache.srh.noaa.gov/tilecache/tilecache.py/1.0.0/fwx/{z}/{x}/{y}.png?type=google&LAYERS=fwx', attrib = 'Red flag fire warning from NWS', fireLayer = new L.TileLayer(fireUrl, {attribution: attrib, maxZoom:18}); 
+    //    map.addLayer(fireLayer);
 
     var bbox = '{  "xmin":-98.997803,  "ymin":29.430029,  "xmax":-96.778564,  "ymax":30.779598,  "spatialReference":{"wkid":4326} }';
     //var bbox = '{  "xmin":-124.123535,  "ymin":42.212245,  "xmax":-116.51001,  "ymax":45.9053,  "spatialReference":{"wkid":4326} }';
@@ -173,17 +173,11 @@ function setupMap() {
     var stations = new L.LayerGroup();
 
     $.getJSON( "http://data.austintexas.gov/resource/64cq-wf5u.json", function( data ) {
-    console.log(data.toSource());
       $.each( data, function( key, val ) {
         var rr = JSON.parse(val.location_1.human_address);
-        console.log ( rr.zip );
-        console.log ( rr.address );
-        console.log ( val.y ); 
-        console.log ( val.x );
         var m = new L.Marker(new L.LatLng(val.y, val.x), {icon:icon});
         stations.addLayer(m);
         m.bindPopup(rr.address + "<br />Austin, TX " + rr.zip);
-//        m.bindPopup(rr.address + "<br />Austin, TX " + rr.zip).openPopup();
       });
     });
     map.addLayer(stations);
