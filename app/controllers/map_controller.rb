@@ -6,7 +6,6 @@ class TFS
   include HTTParty
   require 'logger'
 
-  #base_uri 'http://ags1.dtsgis.com/ArcGIS/rest/services/v3scfa'
   base_uri 'http://vcloud.timmons.com/ArcGIS/rest/services/TxWRAP_v3scfa'
 
 
@@ -79,17 +78,17 @@ class MapController < ApplicationController
     @address_str = params[:q]
     #to get only the lat lon, use line below and remove following five lines 
     #@coordinates = Geocoder.coordinates(@address_str)
-#    @geocode = Geocoder.search(@address_str).to_json
-#    @geocode_response = JSON.parse(@geocode)
+    @geocode = Geocoder.search(@address_str).to_json
+    @geocode_response = JSON.parse(@geocode)
     # google's geocoder doesn't always put county in the same place in the returned data structure, find administrative_area_level_2 which is what they call counties
-#    @address_components = @geocode_response[0]['data']['address_components']
-#    @county_item = @address_components.select { |e| e['types'][0] === "administrative_area_level_2" }
-#    @county = @county_item[0]["long_name"]
-    @county = 'Travis'
+    @address_components = @geocode_response[0]['data']['address_components']
+    @county_item = @address_components.select { |e| e['types'][0] === "administrative_area_level_2" }
+    @county = @county_item[0]["long_name"]
+    #    @county = 'Travis'
     # make sure you're getting back what you want from the geocoder. for example, the yahoo geocoder returns the county every time unlike above:
     # @county = @geocode_response[0]['data']['county'].gsub(' County', '').upcase
-#    @coordinates = [@geocode_response[0]['data']['geometry']['location']['lat'], @coordinates = @geocode_response[0]['data']['geometry']['location']['lng']]
-    @coordinates = ['-97.77818049999999', '30.2303058']
+    @coordinates = [@geocode_response[0]['data']['geometry']['location']['lat'], @coordinates = @geocode_response[0]['data']['geometry']['location']['lng']]
+    #    @coordinates = ['-97.77818049999999', '30.2303058']
     # get coordinates from yahoo geocoder response instead:
     # @coordinates = [@geocode_response[0]['data']['latitude'], @geocode_response[0]['data']['longitude']]
     logger.info "coordinates:" + @coordinates[1].to_s + ' ' + @coordinates[0].to_s
@@ -149,13 +148,10 @@ class MapController < ApplicationController
 
       logger.info "TFS coords: " + @coordinates.inspect
       # Risk Assessment Level
-#      if TFS.risk_assessment(@address.latlon) == nil
       if TFS.risk_assessment(@coordinates) == nil
         @risk_text = "Not available at this time"
       else
-#        @risk_level = TFS.risk_assessment(@address.latlon)
         @risk_level = TFS.risk_assessment(@coordinates)
-        logger.info "risk_level_num: " + @risk_level.to_s
         risk_text_mapping = Hash.new {0}
         risk_text_mapping[0] = "Very Low"
         risk_text_mapping[1] = "Very Low"
