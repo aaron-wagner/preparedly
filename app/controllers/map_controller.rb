@@ -38,7 +38,7 @@ class TFS
       :query => {
         :geometryType => "esriGeometryPoint",
 #        :geometry => "{x: " + latlon.x.to_s + ", y: " + latlon.y.to_s + "}",
-        :geometry => "{x: " + latlon[0].to_s + ", y: " + latlon[1].to_s + "}",
+        :geometry => "{x: " + latlon[1].to_s + ", y: " + latlon[0].to_s + "}",
         :sr => 4326,
         :layers => 'all',
         :tolerance => 3,
