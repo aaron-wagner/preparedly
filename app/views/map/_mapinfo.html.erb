@@ -182,7 +182,8 @@ function setupMap() {
         console.log ( val.x );
         var m = new L.Marker(new L.LatLng(val.y, val.x), {icon:icon});
         stations.addLayer(m);
-        m.bindPopup(rr.address + "<br />Austin, TX " + rr.zip).openPopup();
+        m.bindPopup(rr.address + "<br />Austin, TX " + rr.zip);
+//        m.bindPopup(rr.address + "<br />Austin, TX " + rr.zip).openPopup();
       });
     });
     map.addLayer(stations);
